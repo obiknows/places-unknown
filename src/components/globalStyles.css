@@ -1,5 +1,6 @@
 :root {
-  --primary: #00c2bd;
+  /* --primary: #00c2bd; */
+  --primary: purple;
   --secondary: #000;
   --lightGrey: whitesmoke;
   --midGrey: #cacaca;
