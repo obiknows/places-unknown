@@ -44,31 +44,34 @@ export const HomePageTemplate = ({
 }) => (
   <Location>
     {({ location }) => {
-      let filteredPosts =
+      let featuredPost =
         posts && !!posts.length
           ? byCategory(byDate(posts), title, contentType)
           : []
 
-      let queryObj = location.search.replace('?', '')
-      queryObj = qs.parse(queryObj)
-
-      if (enableSearch && queryObj.s) {
-        const searchTerm = queryObj.s.toLowerCase()
-        filteredPosts = filteredPosts.filter(post =>
-          post.frontmatter.title.toLowerCase().includes(searchTerm)
-        )
-      }
-
       return (
-        <main className="Blog">
-
+        <main className="Home">
+          {/* WELCOME SECTION */}
+          <section className="">
+            <div className="container" style={{textAlign: 'center'}}>
+              <h1 style={{fontSize: `5rem`}}>Welcome to Places Unknown</h1>
+              <h1>Follow the journey of Zeniba</h1>
+            </div>
+          </section>
+          {/* FEATURED BLOG POSTS */}
           {!!posts.length && (
             <section className="section">
               <div className="container">
-                <HomePostSection posts={filteredPosts}  style={{}}/>
+                <HomePostSection posts={featuredPost}  style={{}}/>
               </div>
             </section>
           )}
+          {/* FEATURED VIDEOS */}
+          {/* <section className="section">
+            <div className="container">
+              <HomePostSection posts={featuredPost}  style={{}}/>
+            </div>
+          </section> */}
         </main>
       )
     }}
@@ -120,7 +123,6 @@ export const pageQuery = graphql`
         featuredImage
       }
     }
-
     posts: allMarkdownRemark(
       limit: 1
       filter: { fields: { contentType: { eq: "posts" } } }
